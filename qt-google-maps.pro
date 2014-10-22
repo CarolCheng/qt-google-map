@@ -6,27 +6,12 @@
 
 QT       += core gui webkit network
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webkitwidgets
+
 TARGET = qtmaps
 TEMPLATE = app
 
 INCLUDEPATH += ../qjson/include
-
-linux* {
-LIBS += ../qjson/build/lib/libqjson.so
-}
-
-win32-g++ {
-    LIBS += ../qjson/build/lib/qjson0.dll
-}
-
-win32-msvc* {
-    LIBS += ../qjson/build/lib/qjson0.lib
-}
-
-macx* {
-LIBS += -F../qjson/build/lib -framework qjson
-}
-
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -48,5 +33,3 @@ OTHER_FILES += \
 
 RESOURCES += \
     resource.qrc
-
-

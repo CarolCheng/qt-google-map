@@ -24,40 +24,40 @@ void GeocodeDataManager::getCoordinates(const QString& address)
 
 void GeocodeDataManager::replyFinished(QNetworkReply* reply)
 {
-    QString json = reply->readAll();
-    qDebug() << "Reply = " << json;
-    qDebug() << "URL = " << reply->url();
-    QString strUrl = reply->url().toString();
+//    QString json = reply->readAll();
+//    qDebug() << "Reply = " << json;
+//    qDebug() << "URL = " << reply->url();
+//    QString strUrl = reply->url().toString();
 
-    QJson::Parser parser;
+//    QJson::Parser parser;
 
-    bool ok;
+//    bool ok;
 
-    // json is a QString containing the data to convert
-    QVariant result = parser.parse (json.toLatin1(), &ok);
-    if(!ok)
-    {
-        emit errorOccured(QString("Cannot convert to QJson object: %1").arg(json));
-        return;
-    }
+//    // json is a QString containing the data to convert
+//    QVariant result = parser.parse (json.toLatin1(), &ok);
+//    if(!ok)
+//    {
+//        emit errorOccured(QString("Cannot convert to QJson object: %1").arg(json));
+//        return;
+//    }
 
-    int code = result.toMap()["Status"].toMap()["code"].toInt();
-    if(code != 200)
-    {
-        emit errorOccured(QString("Code of request is: %1").arg(code));
-        return;
-    }
+//    int code = result.toMap()["Status"].toMap()["code"].toInt();
+//    if(code != 200)
+//    {
+//        emit errorOccured(QString("Code of request is: %1").arg(code));
+//        return;
+//    }
 
-    QVariantList placeMarks = result.toMap()["Placemark"].toList();
-    if(placeMarks.count() == 0)
-    {
-        emit errorOccured(QString("Cannot find any locations"));
-        return;
-    }
+//    QVariantList placeMarks = result.toMap()["Placemark"].toList();
+//    if(placeMarks.count() == 0)
+//    {
+//        emit errorOccured(QString("Cannot find any locations"));
+//        return;
+//    }
 
-    double east  = placeMarks[0].toMap()["Point"].toMap()["coordinates"].toList()[0].toDouble();
-    double north = placeMarks[0].toMap()["Point"].toMap()["coordinates"].toList()[1].toDouble();
+//    double east  = placeMarks[0].toMap()["Point"].toMap()["coordinates"].toList()[0].toDouble();
+//    double north = placeMarks[0].toMap()["Point"].toMap()["coordinates"].toList()[1].toDouble();
 
-    emit coordinatesReady(east, north);
+//    emit coordinatesReady(east, north);
 
 }
